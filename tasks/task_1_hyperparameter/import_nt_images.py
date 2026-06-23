@@ -16,7 +16,7 @@ from PIL import Image
 
 from src import load_split, resolve_repo_path
 
-DEFAULT_OUTPUT_DIR = Path("tasks/task_0_baseline_cnn/imported_images")
+DEFAULT_OUTPUT_DIR = Path("tasks/task_1_hyperparameter/imported_images")
 
 
 def parse_args() -> argparse.Namespace:

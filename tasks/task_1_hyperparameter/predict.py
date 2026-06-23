@@ -1,4 +1,4 @@
-"""Predict the fracture label of one image with the Task 0 best checkpoint."""
+"""Predict one image with the validation-locked Task 1 Optuna model."""
 
 from __future__ import annotations
 
@@ -17,7 +17,7 @@ from PIL import Image
 
 from src import resolve_device, resolve_repo_path, restore_model
 
-DEFAULT_CHECKPOINT = Path("tasks/task_0_baseline_cnn/results/best_model.pt")
+DEFAULT_CHECKPOINT = Path("tasks/task_1_hyperparameter/results/final_model.pt")
 LABEL_NAMES = {0: "no fracture", 1: "fracture"}
 
 
@@ -39,7 +39,7 @@ def parse_args() -> argparse.Namespace:
 
 
 def load_image(image_path: str | Path) -> torch.Tensor:
-    """Load one image using the preprocessing locked by the Task 0 run."""
+    """Load one image using the preprocessing locked by the Task 1 run."""
     resolved_path = resolve_repo_path(image_path)
     if not resolved_path.is_file():
         raise FileNotFoundError(f"image not found: {resolved_path}")
@@ -71,7 +71,7 @@ def main() -> None:
     device = resolve_device(args.device)
     model, checkpoint = restore_model(args.checkpoint, device=device)
     if checkpoint["dataset"] != "NT":
-        raise ValueError(f"Task 0 prediction requires an NT checkpoint, got {checkpoint['dataset']}")
+        raise ValueError(f"Task 1 prediction requires an NT checkpoint, got {checkpoint['dataset']}")
     validate_checkpoint_preprocessing(checkpoint)
 
     image = load_image(args.image).to(device)

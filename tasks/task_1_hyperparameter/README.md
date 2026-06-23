@@ -108,6 +108,8 @@ separate in `final_metrics.json`.
 ## Artifacts
 
 - `optuna_search.py` — Reproducible search, pruning, retraining, and final evaluation CLI.
+- `import_nt_images.py` — Export selected NT NPZ samples as labeled PNG files.
+- `predict.py` — Predict a single image with the validation-locked Task 1 model.
 - `results/optuna_study.db` — Persistent Optuna SQLite study with all 53 trials.
 - `results/trials.csv` — Flattened completed/pruned trial records and parameters.
 - `results/best_params.json` — Search space, best trial, selected parameters, and importances.
@@ -118,6 +120,45 @@ separate in `final_metrics.json`.
 - `results/final_training_curves.png` — Final retraining loss and accuracy curves.
 - `results/final_metrics.json` — Separated exploratory, final-validation, and final-test results.
 - `results/study_config.json` — Full environment, split, search, and retraining configuration.
+
+## Predicting with the selected Task 1 model
+
+The supplied NT samples are stored inside NPZ archives. Export one or more images by passing
+their zero-based indices to `import_nt_images.py`. The default split is `test`, and each PNG
+filename includes its known label.
+
+Run this exact sequence from the repository root on Windows:
+
+```powershell
+# 1. Export NT/test image 1 into the Task 1 imported_images directory.
+conda run -n cnn_project python .\tasks\task_1_hyperparameter\import_nt_images.py 1 --split test
+
+# 2. Predict it with results/final_model.pt from the Optuna-selected configuration.
+conda run -n cnn_project python .\tasks\task_1_hyperparameter\predict.py tasks\task_1_hyperparameter\imported_images\nt_test_0001_label0.png
+
+# 3. Optionally remove the exported image.
+Remove-Item .\tasks\task_1_hyperparameter\imported_images\nt_test_0001_label0.png
+```
+
+Label `0` means **no fracture** and label `1` means **fracture**. Image `1` has known label `0`,
+and the saved Task 1 model predicts label `0`. The command also prints both class softmax scores.
+
+Multiple images can be exported in one command:
+
+```powershell
+conda run -n cnn_project python .\tasks\task_1_hyperparameter\import_nt_images.py 0 1 2 --split test
+```
+
+For an external image, pass its repository-relative or absolute path directly:
+
+```powershell
+conda run -n cnn_project python .\tasks\task_1_hyperparameter\predict.py path\to\image.png --device auto
+```
+
+The script converts the input to grayscale, resizes it to `128 x 128`, scales it to `[0, 1]`,
+validates checkpoint preprocessing metadata, and defaults to `results/final_model.pt`. Predictions
+are meaningful only for images sufficiently similar to the NT microscopy data. Softmax scores are
+not calibrated probabilities.
 
 ## Limitations
 

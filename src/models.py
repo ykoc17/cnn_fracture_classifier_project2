@@ -10,9 +10,15 @@ from torch import nn
 @dataclass(frozen=True)
 class SimpleCNNConfig:
     in_channels: int = 1
-    channels: tuple[int, int, int] = (32, 64, 128)
+    channels: tuple[int, ...] = (32, 64, 128)
     num_classes: int = 2
     dropout: float = 0.0
+
+    def __post_init__(self) -> None:
+        if len(self.channels) < 2 or any(channel < 1 for channel in self.channels):
+            raise ValueError("channels must contain at least two positive widths")
+        if not 0.0 <= self.dropout < 1.0:
+            raise ValueError("dropout must be in [0, 1)")
 
 
 class SimpleCNN(nn.Module):
@@ -21,22 +27,24 @@ class SimpleCNN(nn.Module):
     def __init__(self, config: SimpleCNNConfig | None = None) -> None:
         super().__init__()
         self.config = config or SimpleCNNConfig()
-        c1, c2, c3 = self.config.channels
-        self.features = nn.Sequential(
-            nn.Conv2d(self.config.in_channels, c1, kernel_size=3, padding=1),
-            nn.ReLU(inplace=True),
-            nn.MaxPool2d(2),
-            nn.Conv2d(c1, c2, kernel_size=3, padding=1),
-            nn.ReLU(inplace=True),
-            nn.MaxPool2d(2),
-            nn.Conv2d(c2, c3, kernel_size=3, padding=1),
-            nn.ReLU(inplace=True),
-            nn.AdaptiveAvgPool2d(1),
-        )
+        layers: list[nn.Module] = []
+        input_channels = self.config.in_channels
+        for index, output_channels in enumerate(self.config.channels):
+            layers.extend(
+                [
+                    nn.Conv2d(input_channels, output_channels, kernel_size=3, padding=1),
+                    nn.ReLU(inplace=True),
+                ]
+            )
+            if index < len(self.config.channels) - 1:
+                layers.append(nn.MaxPool2d(2))
+            input_channels = output_channels
+        layers.append(nn.AdaptiveAvgPool2d(1))
+        self.features = nn.Sequential(*layers)
         self.classifier = nn.Sequential(
             nn.Flatten(),
             nn.Dropout(self.config.dropout),
-            nn.Linear(c3, self.config.num_classes),
+            nn.Linear(self.config.channels[-1], self.config.num_classes),
         )
 
     def forward(self, inputs: torch.Tensor) -> torch.Tensor:

@@ -1,0 +1,51 @@
+{
+  "best_params": {
+    "base_channels": 16,
+    "batch_size": 32,
+    "depth": 3,
+    "dropout": 0.2,
+    "learning_rate": 0.011812093209924242,
+    "optimizer": "AdamW",
+    "weight_decay": 9.394678769587759e-07
+  },
+  "best_trial_number": 42,
+  "best_validation_accuracy": 0.9644128113879004,
+  "parameter_importances": {
+    "base_channels": 0.1141387869201919,
+    "batch_size": 0.37446709131570594,
+    "depth": 0.0038723099463981443,
+    "dropout": 0.015177365172126556,
+    "learning_rate": 0.41683918401638015,
+    "optimizer": 0.011239761681053357,
+    "weight_decay": 0.06426550094814407
+  },
+  "search_space": {
+    "base_channels": [
+      8,
+      12,
+      16
+    ],
+    "batch_size": [
+      32,
+      64,
+      128
+    ],
+    "depth": "integer [2, 4]",
+    "dropout": "[0.0, 0.4] in steps of 0.1",
+    "learning_rate": "log-uniform [1e-4, 5e-2]",
+    "optimizer": [
+      "Adam",
+      "AdamW",
+      "SGD"
+    ],
+    "weight_decay": "log-uniform [1e-7, 1e-3]"
+  },
+  "seed": 42,
+  "state_counts": {
+    "COMPLETE": 20,
+    "FAIL": 0,
+    "PRUNED": 33
+  },
+  "total_trials": 53,
+  "trial_epochs": 5
+}

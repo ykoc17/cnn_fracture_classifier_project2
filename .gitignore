@@ -35,6 +35,7 @@ htmlcov/
 tmp*/
 tests/_scratch/*.pt
 tests/_scratch/NT/*.npz
+tasks/task_0_baseline_cnn/imported_images/
 
 # Required task results, figures, reports, and checkpoints are intentionally
 # not ignored because they are submission deliverables.

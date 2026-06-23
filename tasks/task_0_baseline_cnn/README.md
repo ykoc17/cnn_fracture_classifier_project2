@@ -53,6 +53,7 @@ reported test accuracy and loss exactly.
 
 - `model.py` — Task 0 model definition.
 - `train.py` — Reproducible training and final evaluation CLI.
+- `import_nt_images.py` — Export selected NT NPZ samples as labeled PNG files.
 - `predict.py` — Single-image prediction CLI using the saved best model.
 - `results/best_model.pt` — Best validation-loss model and complete checkpoint metadata.
 - `results/history.csv` — Per-epoch train/validation loss and accuracy.
@@ -61,6 +62,45 @@ reported test accuracy and loss exactly.
 - `results/training_curves.png` — Train/validation loss and accuracy curves.
 
 ## Predicting a new image
+
+### Exporting NT images for a test
+
+The supplied NT images are stored inside NPZ archives rather than as individual image files.
+Use `import_nt_images.py` with one or more zero-based indices to export PNG files. The default
+split is `test`, and the true label is included in each filename.
+
+```powershell
+conda run -n cnn_project python .\tasks\task_0_baseline_cnn\import_nt_images.py 0 1 2 --split test
+```
+
+This creates files such as:
+
+```text
+tasks/task_0_baseline_cnn/imported_images/nt_test_0000_label1.png
+```
+
+The valid test indices are `0` through `281`. You can also select `--split train` or
+`--split val`, or change the destination with `--output-dir`.
+
+### Exact test sequence
+
+Run these commands from the repository root:
+
+```powershell
+# 1. Export NT/test image 0. Its true label is included in the output filename.
+conda run -n cnn_project python .\tasks\task_0_baseline_cnn\import_nt_images.py 0 --split test
+
+# 2. Predict the exported image with the saved best checkpoint.
+conda run -n cnn_project python .\tasks\task_0_baseline_cnn\predict.py tasks\task_0_baseline_cnn\imported_images\nt_test_0000_label1.png
+
+# 3. Optionally remove the exported test image.
+Remove-Item .\tasks\task_0_baseline_cnn\imported_images\nt_test_0000_label1.png
+```
+
+For image `0`, the known label is `1` (`fracture`). The saved Task 0 checkpoint predicts label
+`1` for this image.
+
+### Predicting any image file
 
 Provide an image path relative to the repository root. The script converts it to grayscale,
 resizes it to `128 x 128`, scales pixels to `[0, 1]`, loads `results/best_model.pt`, and prints

@@ -1,0 +1,36 @@
+{
+  "accuracy": 0.9219858156028369,
+  "checkpoint": "C:\\Users\\ASUS\\Documents\\Ya\u011f\u0131z Belge Ar\u015fivi\\Studium Files\\8. Semester (ETH)\\Studium\\Machine Learning and Optimization\\Project\\3_CNN\\OptML_CNN_project\\OptML_CNN_project\\tasks\\task_0_baseline_cnn\\results\\best_model.pt",
+  "checkpoint_validation_metric": {
+    "accuracy": 0.9039145907473309,
+    "loss": 0.1768424599514313
+  },
+  "confusion_matrix": [
+    [
+      134,
+      8
+    ],
+    [
+      14,
+      126
+    ]
+  ],
+  "dataset": "NT",
+  "evaluation_seconds": 0.9255769000155851,
+  "loss": 0.18987287718353543,
+  "per_class": {
+    "0": {
+      "f1": 0.9241379310344827,
+      "precision": 0.9054054054054054,
+      "recall": 0.9436619718309859,
+      "support": 142
+    },
+    "1": {
+      "f1": 0.9197080291970803,
+      "precision": 0.9402985074626866,
+      "recall": 0.9,
+      "support": 140
+    }
+  },
+  "split": "test"
+}

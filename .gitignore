@@ -1,1 +1,40 @@
-data
+# Supplied datasets
+data/
+
+# Local environments
+.venv/
+venv/
+env/
+.conda/
+
+# Python caches and build artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+build/
+dist/
+*.egg-info/
+
+# Test, coverage, and type-checker caches
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Temporary and editor files
+*.tmp
+*.temp
+*.bak
+*.swp
+*~
+tmp*/
+tests/_scratch/*.pt
+tests/_scratch/NT/*.npz
+
+# Required task results, figures, reports, and checkpoints are intentionally
+# not ignored because they are submission deliverables.

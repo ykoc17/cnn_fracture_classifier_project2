@@ -33,10 +33,18 @@ htmlcov/
 *.swp
 *~
 tmp*/
+_audit_tmp/
 tests/_scratch/*.pt
 tests/_scratch/NT/*.npz
 tasks/task_0_baseline_cnn/imported_images/
 tasks/task_1_hyperparameter/imported_images/
+
+# LaTeX build artifacts and temporary report renders
+*.aux
+*.log
+*.out
+*.synctex.gz
+report/rendered/
 
 # Required task results, figures, reports, and checkpoints are intentionally
 # not ignored because they are submission deliverables.

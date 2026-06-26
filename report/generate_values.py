@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import argparse
 import json
 import math
 from pathlib import Path
@@ -37,7 +38,7 @@ FIGURES = [
     "tasks/task_2_robustness/results/noise_gallery.png",
     (
         "tasks/task_3_interpretability/results/activation_maps/"
-        "activation_index_0088_false_positive.png"
+        "act_0088_fp.png"
     ),
     "tasks/task_3_interpretability/results/gradcam/gradcam_index_0000_correct_class_1.png",
     "tasks/task_3_interpretability/results/gradcam/gradcam_index_0007_false_negative.png",
@@ -80,7 +81,18 @@ def require_close(left: float, right: float, description: str) -> None:
         raise ValueError(f"inconsistent saved metrics for {description}: {left} != {right}")
 
 
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description=(
+            "Generate LaTeX result macros and a hash manifest from the saved "
+            "Task 0-5 artifacts."
+        )
+    )
+    return parser.parse_args()
+
+
 def main() -> None:
+    parse_args()
     values = {name: read_json(path) for name, path in DATA_INPUTS.items()}
     missing_figures = [path for path in FIGURES if not (REPO_ROOT / path).is_file()]
     if missing_figures:

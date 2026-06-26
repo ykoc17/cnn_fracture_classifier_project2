@@ -1,6 +1,6 @@
 {
   "accuracy": 0.9219858156028369,
-  "checkpoint": "C:\\Users\\ASUS\\Documents\\Ya\u011f\u0131z Belge Ar\u015fivi\\Studium Files\\8. Semester (ETH)\\Studium\\Machine Learning and Optimization\\Project\\3_CNN\\OptML_CNN_project\\OptML_CNN_project\\tasks\\task_0_baseline_cnn\\results\\best_model.pt",
+  "checkpoint": "tasks/task_0_baseline_cnn/results/best_model.pt",
   "checkpoint_epoch": 13,
   "checkpoint_sha256": "9f021dd15f7d3f4ef172b64a54c26bc4c8e6ee14a512a68e53d7cb601b86806b",
   "checkpoint_validation_metric": {

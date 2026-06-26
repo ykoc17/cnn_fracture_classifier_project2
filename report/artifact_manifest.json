@@ -8,12 +8,12 @@
   "generator": "report/generate_values.py",
   "inputs": {
     "tasks/task_0_baseline_cnn/results/metrics.json": {
-      "sha256": "73cd54278e3cfaaa8254a3ad4d91154f6b6791ed9ede136320270d20b07fcda9",
-      "size_bytes": 950
+      "sha256": "7f999025ca5c70975411fa5d255495264e1071eca3fae1b0874ba4cc72d96847",
+      "size_bytes": 752
     },
     "tasks/task_0_baseline_cnn/results/run_config.json": {
-      "sha256": "070e358534e9ebc863b369e837571a7c38bc017c1b10332c07fa0db0e9bba30d",
-      "size_bytes": 1985
+      "sha256": "b8999b0b97a8eae62b54524aaed06f64000aa38dfc24b3aa87c49f83cbf2ab30",
+      "size_bytes": 1592
     },
     "tasks/task_0_baseline_cnn/results/training_curves.png": {
       "sha256": "082adc70303e261911e3534089cf6123ea6c7cdde23a1add87ef78d2a0f54032",
@@ -36,8 +36,8 @@
       "size_bytes": 37177
     },
     "tasks/task_1_hyperparameter/results/study_config.json": {
-      "sha256": "4bff9244ade2b55aafeb7c073cac16477ae95b7d536a41494a40934554094d20",
-      "size_bytes": 2444
+      "sha256": "8c9c7b8cd7679eb249a7e60562e321252a5b109df69ce5b2ed23a02758823f83",
+      "size_bytes": 2051
     },
     "tasks/task_2_robustness/results/accuracy_vs_sigma.png": {
       "sha256": "e8a87095b5b821974626f190655a1493d08eb086c4c78cf25eebcedba022feab",
@@ -48,16 +48,16 @@
       "size_bytes": 1933059
     },
     "tasks/task_2_robustness/results/summary.json": {
-      "sha256": "06a724cf9b0526bba526bb66840d20ff932fbec741b694029ff5dd0213ea6b4d",
-      "size_bytes": 4083
+      "sha256": "74bd01d2771b09d2dd1bdb2e1fa7be4a2701e957248efe0b0ba75327fd3001f3",
+      "size_bytes": 3885
     },
-    "tasks/task_3_interpretability/results/activation_maps/activation_index_0088_false_positive.png": {
+    "tasks/task_3_interpretability/results/activation_maps/act_0088_fp.png": {
       "sha256": "2f6166b42a3e3ebf0b2ec7ffabfc061b80598f09a8fb7ce92867e4d3e44f3542",
       "size_bytes": 604642
     },
     "tasks/task_3_interpretability/results/activation_maps/activation_metadata.json": {
-      "sha256": "11585f183a39b59a9b877f716746683578082b1d908bd9c408aff37159f5d742",
-      "size_bytes": 5826
+      "sha256": "05d00ce1c239798a50493390c994ddf0738edb5babfef91bcc94d998d1f75dae",
+      "size_bytes": 5526
     },
     "tasks/task_3_interpretability/results/gradcam/gradcam_index_0000_correct_class_1.png": {
       "sha256": "3778a1ff85dc2146f7e9b2d53979692291ea8625690dc20d8601a74010548c23",
@@ -72,28 +72,28 @@
       "size_bytes": 246048
     },
     "tasks/task_3_interpretability/results/gradcam/gradcam_metadata.json": {
-      "sha256": "b73669ce942fe3f4b13ebaefa67ce73f162e2422130430603dcef068393c473f",
-      "size_bytes": 2842
+      "sha256": "120fecd5f26a95df32027d80dde33a2b14f68dafb4d7992afe0b7a6cbb28bf47",
+      "size_bytes": 2644
     },
     "tasks/task_4_confusion_matrix/results/confusion_matrix_normalized.png": {
       "sha256": "0c0e338fce824ef2ed1a2203b93a7ff3f7287b92701359974d083236b0f5aa01",
       "size_bytes": 96758
     },
     "tasks/task_4_confusion_matrix/results/metrics.json": {
-      "sha256": "c23ddb0ba807cf8b32889f31bc80f24db4282bbbb0bea0cd575608d9e6700111",
-      "size_bytes": 2868
+      "sha256": "a93926c7a71b34e16540155071dcc3bf3393c5423bef313ad51242a479e50d40",
+      "size_bytes": 2670
     },
     "tasks/task_4_confusion_matrix/results/misclassified_gallery.png": {
       "sha256": "c781829b24832191557a9fdd4a0251952f0ee134e25b2b953e67ce1fddca6685",
       "size_bytes": 660602
     },
     "tasks/task_5_cross_dataset/results/NT/run_config.json": {
-      "sha256": "026384fa0a343edcea1a1706cb26365cf6de4cebfa78513e04c684958eddc844",
-      "size_bytes": 1672
+      "sha256": "40a3c3790e7930f2a9089fc877d5a9f55c3ab064bd5486e0ef22c4b8cdd5597c",
+      "size_bytes": 1278
     },
     "tasks/task_5_cross_dataset/results/UT/run_config.json": {
-      "sha256": "230f4dbc3fd4406e5cf768daf29b50814115719009506eb4773d9a5d95506230",
-      "size_bytes": 1674
+      "sha256": "956b767df1e6a9f8487c458d02c1f1ca34683080524d0b6a9ac15caedf3b4962",
+      "size_bytes": 1280
     },
     "tasks/task_5_cross_dataset/results/accuracy_heatmap.png": {
       "sha256": "eb0499bfe11c7dc3d89e6996d2a55ee4f66031ab153ca044a0a6ca10caec675c",
@@ -104,8 +104,8 @@
       "size_bytes": 1785
     },
     "tasks/task_5_cross_dataset/results/raw_metrics.json": {
-      "sha256": "390c100e200dfea6e2d5d06823b9bbe33c69cdadec822f08b6cf6c056758b926",
-      "size_bytes": 6823
+      "sha256": "b7799e36de2e5a06d5615e450254c3a27ea23bb6e04888599798b71f44e443f7",
+      "size_bytes": 6027
     }
   },
   "output": "report/results_values.tex"

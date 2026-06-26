@@ -13,7 +13,7 @@
     "name": "simple_cnn"
   },
   "batch_size": 64,
-  "data_root": "C:\\Users\\ASUS\\Documents\\Ya\u011f\u0131z Belge Ar\u015fivi\\Studium Files\\8. Semester (ETH)\\Studium\\Machine Learning and Optimization\\Project\\3_CNN\\OptML_CNN_project\\OptML_CNN_project\\data\\processed",
+  "data_root": "data/processed",
   "dataset": "UT",
   "device_requested": "cpu",
   "device_resolved": "cpu",
@@ -25,7 +25,7 @@
   "loss": "CrossEntropyLoss",
   "model_selection": "minimum UT/val cross-entropy loss",
   "optimizer": "Adam",
-  "output_dir": "C:\\Users\\ASUS\\Documents\\Ya\u011f\u0131z Belge Ar\u015fivi\\Studium Files\\8. Semester (ETH)\\Studium\\Machine Learning and Optimization\\Project\\3_CNN\\OptML_CNN_project\\OptML_CNN_project\\tasks\\task_5_cross_dataset\\results\\UT",
+  "output_dir": "tasks/task_5_cross_dataset/results/UT",
   "preprocessing": {
     "augmentation": null,
     "dtype": "float32",

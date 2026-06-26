@@ -28,7 +28,14 @@ from sklearn.metrics import (
 )
 from torch.utils.data import DataLoader, TensorDataset
 
-from src import evaluate_model, load_split, resolve_device, resolve_repo_path, restore_model
+from src import (
+    evaluate_model,
+    load_split,
+    repo_relative_path,
+    resolve_device,
+    resolve_repo_path,
+    restore_model,
+)
 
 DEFAULT_CHECKPOINT = Path("tasks/task_0_baseline_cnn/results/best_model.pt")
 DEFAULT_REFERENCE_METRICS = Path("tasks/task_0_baseline_cnn/results/metrics.json")
@@ -365,7 +372,7 @@ def main() -> None:
     )
 
     metrics_payload = {
-        "checkpoint": str(checkpoint_path),
+        "checkpoint": repo_relative_path(checkpoint_path),
         "checkpoint_sha256": file_sha256(checkpoint_path),
         "checkpoint_epoch": int(checkpoint["epoch"]),
         "checkpoint_validation_metric": checkpoint["validation_metric"],

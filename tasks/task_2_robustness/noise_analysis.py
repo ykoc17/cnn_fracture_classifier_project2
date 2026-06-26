@@ -28,6 +28,7 @@ from src import (
     PROCESSED_DATA_ROOT,
     evaluate_model,
     load_split,
+    repo_relative_path,
     resolve_device,
     resolve_repo_path,
     restore_model,
@@ -344,7 +345,7 @@ def main() -> None:
     write_json(
         output_dir / "summary.json",
         {
-            "checkpoint": str(checkpoint_path),
+            "checkpoint": repo_relative_path(checkpoint_path),
             "checkpoint_sha256": file_sha256(checkpoint_path),
             "dataset": "NT",
             "split": "test",

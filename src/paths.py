@@ -13,3 +13,12 @@ def resolve_repo_path(path: str | Path, *, create_parent: bool = False) -> Path:
     if create_parent:
         resolved.parent.mkdir(parents=True, exist_ok=True)
     return resolved
+
+
+def repo_relative_path(path: str | Path) -> str:
+    """Return a portable repository-relative path when ``path`` is inside the repo."""
+    resolved = resolve_repo_path(path)
+    try:
+        return resolved.relative_to(REPO_ROOT).as_posix()
+    except ValueError:
+        return str(resolved)

@@ -30,6 +30,7 @@ from src import (
     create_training_loaders,
     evaluate_model,
     fit,
+    repo_relative_path,
     resolve_device,
     resolve_repo_path,
     restore_model,
@@ -209,7 +210,7 @@ def main() -> None:
         "architecture": model.architecture_config(),
         "batch_size": args.batch_size,
         "command_arguments": sys.argv[1:],
-        "data_root": str(data_root),
+        "data_root": repo_relative_path(data_root),
         "dataset": DATASET,
         "device_requested": args.device,
         "device_resolved": str(device),
@@ -221,7 +222,7 @@ def main() -> None:
         "loss": "CrossEntropyLoss",
         "model_selection": "minimum NT/val cross-entropy loss",
         "optimizer": "Adam",
-        "output_dir": str(output_dir),
+        "output_dir": repo_relative_path(output_dir),
         "preprocessing": PREPROCESSING,
         "seed": args.seed,
         "software": {
@@ -259,7 +260,7 @@ def main() -> None:
     evaluation_seconds = time.perf_counter() - evaluation_start
     assert test_result.loss is not None
     metrics = {
-        "checkpoint": str(checkpoint_path),
+        "checkpoint": repo_relative_path(checkpoint_path),
         "checkpoint_validation_metric": restored_checkpoint["validation_metric"],
         "dataset": DATASET,
         "evaluation_seconds": evaluation_seconds,

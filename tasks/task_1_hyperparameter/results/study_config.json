@@ -13,7 +13,7 @@
     "name": "simple_cnn"
   },
   "best_trial_number": 42,
-  "data_root": "C:\\Users\\ASUS\\Documents\\Ya\u011f\u0131z Belge Ar\u015fivi\\Studium Files\\8. Semester (ETH)\\Studium\\Machine Learning and Optimization\\Project\\3_CNN\\OptML_CNN_project\\OptML_CNN_project\\data\\processed",
+  "data_root": "data/processed",
   "dataset": "NT",
   "device_requested": "cpu",
   "device_resolved": "cpu",
@@ -24,7 +24,7 @@
   "final_training_seconds": 47.39686089998577,
   "final_validation_best_epoch": 5,
   "objective": "maximize best NT/val accuracy; NT/test excluded",
-  "output_dir": "C:\\Users\\ASUS\\Documents\\Ya\u011f\u0131z Belge Ar\u015fivi\\Studium Files\\8. Semester (ETH)\\Studium\\Machine Learning and Optimization\\Project\\3_CNN\\OptML_CNN_project\\OptML_CNN_project\\tasks\\task_1_hyperparameter\\results",
+  "output_dir": "tasks/task_1_hyperparameter/results",
   "preprocessing": {
     "augmentation": null,
     "dtype": "float32",

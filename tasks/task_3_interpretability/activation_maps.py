@@ -17,7 +17,7 @@ import matplotlib.pyplot as plt
 import torch
 from torch import nn
 
-from src import resolve_device, resolve_repo_path
+from src import repo_relative_path, resolve_device, resolve_repo_path
 from tasks.task_3_interpretability.common import (
     DEFAULT_CHECKPOINT,
     DEFAULT_SAMPLE_INDICES,
@@ -195,7 +195,7 @@ def main() -> None:
     write_json(
         output_dir / "activation_metadata.json",
         {
-            "checkpoint": str(checkpoint_path),
+            "checkpoint": repo_relative_path(checkpoint_path),
             "checkpoint_sha256": file_sha256(checkpoint_path),
             "dataset": "NT",
             "split": "test",

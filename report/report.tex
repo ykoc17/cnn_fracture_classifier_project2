@@ -39,21 +39,17 @@
 \begin{document}
 
 \begin{center}
-  {\LARGE\bfseries Reproducible CNN Classification Study\par}
+  {\LARGE\bfseries CNN Classification Study\par}
   \vspace{2mm}
-  {\large Machine Learning and Optimization Project\par}
+  {\large Yagiz Koc\par}
   \vspace{1mm}
-  {\small Final report generated from saved experiment artifacts\par}
+  {\large June 26, 2026\par}
 \end{center}
 
 \section*{Introduction}
 
 This report covers the completed tasks \textbf{0, 1, 2, 3, 4, and 5}. Tasks 0--4 use
-NT as the graded dataset. This choice follows the authoritative project PDF, which labels
-ASB ``DO NOT USE'' because its annotations have systematic problems
-\cite{projectbrief}. Task 5 additionally uses the valid-label UT dataset for the prescribed
-NT$\rightarrow$UT and UT$\rightarrow$NT experiments; ASB is never used for graded training
-or evaluation.
+NT as the graded dataset. Task 5 additionally uses the valid-label UT dataset for the prescribed NT$\rightarrow$UT and UT$\rightarrow$NT experiments; ASB is never used for graded training or evaluation.
 
 All displayed values are generated from the saved JSON/CSV artifacts by
 \nolinkurl{report/generate_values.py}. The generator checks figure existence, hashes its
@@ -64,7 +60,7 @@ validation, and test is accessed only after checkpoint and preprocessing lock.
 \begin{table}[h]
 \centering
 \small
-\caption{Completed tasks and explicit report page ranges. Each task begins after a forced page break.}
+\caption{Completed tasks and explicit report page ranges.}
 \label{tab:task-pages}
 \begin{tabular}{clc}
 \toprule
@@ -80,20 +76,13 @@ Task & Deliverable & Pages \\
 \end{tabular}
 \end{table}
 
-\RunHead{Reproducibility scope}
-The model architecture, preprocessing, seeds, split roles, checkpoints, raw metrics, and
-commands are retained under each task directory. Academic context is provided throughout,
-including convolutional learning \cite{lecun1998}, validation-based early stopping
-\cite{prechelt1998}, robust evaluation \cite{hendrycks2019}, interpretability
-\cite{zeiler2014,selvaraju2017}, and dataset bias \cite{torralba2011}.
-
 \TaskPage{0}{Baseline CNN}
 
 \RunHead{Approach}
 A deliberately simple CNN uses three $3\times3$ convolution/ReLU stages with
 16, 32, and 64 channels, two max-pooling operations, global average pooling, and a
 two-logit head. Raw $128\times128$ float32 images in $[0,1]$ are used without augmentation
-or normalization. Adam \cite{kingma2015} with learning rate $10^{-3}$ and batch size 64
+or normalization. Adam with learning rate $10^{-3}$ and batch size 64
 updates NT/train; minimum NT/val cross-entropy selects the checkpoint, with patience 6.
 
 \RunHead{Results}
@@ -130,8 +119,7 @@ Confusion matrix & \texttt{[[\TaskZeroCMZeroZero,\TaskZeroCMZeroOne],[\TaskZeroC
 \textbf{Observation:} learning is rapid through approximately epoch 6, after which validation
 loss oscillates around a plateau; final accuracy is \TaskZeroAccuracy\%.
 \textbf{Interpretation:} the compact convolutional hierarchy is sufficient to learn useful
-NT texture/edge features, consistent with the local-bias advantages of CNNs
-\cite{lecun1998}. \textbf{Limitation:} this is one seed, one NT split, and no augmentation;
+NT texture/edge features, consistent with the local-bias advantages of CNNs. \textbf{Limitation:} this is one seed, one NT split, and no augmentation;
 the test result does not establish robustness or cross-domain performance.
 
 \CodePath{tasks/task_0_baseline_cnn/}
@@ -140,7 +128,7 @@ the test result does not establish robustness or cross-domain performance.
 \TaskPage{1}{Optuna Hyperparameter Study}
 
 \RunHead{Approach}
-A seeded Optuna TPE study with median pruning \cite{akiba2019} searches learning rate,
+A seeded Optuna TPE study with median pruning searches learning rate,
 batch size, optimizer, weight decay, depth, channel width, and dropout. Each trial uses
 NT/train and NT/val for \TaskOneTrialEpochs{} epochs; NT/test remains unopened. The study
 contains \TaskOneTrials{} trials (\TaskOneComplete{} complete, \TaskOnePruned{} pruned).
@@ -199,7 +187,7 @@ $\sigma\in\{0,.05,.10,.15,.20,.30,.50\}$. Gaussian noise is added in the origina
 $[0,1]$ image domain and clamped before applying checkpoint preprocessing. Each nonzero
 $\sigma$ uses \TaskTwoRealizations{} deterministic realizations. Failure means accuracy
 $\leq\TaskTwoChanceThreshold\%$ or a drop $\geq\TaskTwoFailureDrop$ percentage points,
-following the corruption-testing motivation of Hendrycks and Dietterich \cite{hendrycks2019}.
+following the corruption-testing motivation of Hendrycks and Dietterich.
 
 \RunHead{Results}
 \begin{minipage}[t]{0.43\linewidth}
@@ -242,11 +230,9 @@ uncertainty precision, and only one frozen NT model is assessed.
 \TaskPage{3}{Activation Maps and Grad-CAM}
 
 \RunHead{Approach}
-Forward hooks capture activation maps after all three convolution/ReLU depths; Grad-CAM
-\cite{selvaraju2017} targets each prediction at the final convolution. Four fixed NT/test
+Forward hooks capture activation maps after all three convolution/ReLU depths; Grad-CAM targets each prediction at the final convolution. Four fixed NT/test
 indices cover correct predictions from both classes and both error directions. Hooks and
-gradients are removed after use. These methods diagnose representations
-\cite{zeiler2014}; Grad-CAM is model-localized evidence, not causal proof.
+gradients are removed after use. These methods diagnose representations; Grad-CAM is model-localized evidence, not causal proof.
 
 \RunHead{Results}
 \begin{table}[h]
@@ -267,7 +253,7 @@ Index & Role & True & Predicted & Confidence (\%) \\
 \centering
 \begin{minipage}[c]{0.40\linewidth}
 \centering
-\includegraphics[width=0.86\linewidth]{tasks/task_3_interpretability/results/activation_maps/activation_index_0088_false_positive.png}
+\includegraphics[width=0.86\linewidth]{tasks/task_3_interpretability/results/activation_maps/act_0088_fp.png}
 \small (a) Multi-depth activations, false positive \TaskThreeFalsePositiveIndex.
 \end{minipage}\hfill
 \begin{minipage}[c]{0.58\linewidth}
@@ -299,7 +285,7 @@ confidence limit generalization and explanation strength.
 The frozen Task 0 model is evaluated once on all \TaskZeroTestSize{} NT/test samples in index
 order. Predictions, confidence, correctness, raw/row-normalized matrices, class metrics, and
 stable false-positive/false-negative gallery indices are saved. Precision, recall, and F1 are
-reported because accuracy alone hides directional errors \cite{powers2011}.
+reported because accuracy alone hides directional errors.
 
 \RunHead{Results}
 \begin{table}[h]
@@ -392,70 +378,29 @@ UT & \TaskFiveUTBestEpoch & \TaskFiveUTTrainingSeconds \\
 no single-class collapse. UT$\rightarrow$NT reaches \TaskFiveUTNT\%, only one correct image
 above NT$\rightarrow$NT. \textbf{Interpretation:} UT features overlap well with NT in this run,
 while NT does not fully cover UT variability; accuracy cannot identify the physical source of
-shift. This reflects the dataset-bias problem \cite{torralba2011} and motivates transfer methods
-\cite{pan2010}. \textbf{Limitation:} one seed, unequal test sizes, identity preprocessing, and no
+shift. This reflects the dataset-bias problem and motivates transfer methods. \textbf{Limitation:} one seed, unequal test sizes, identity preprocessing, and no
 domain adaptation prevent broader claims. The saved leakage audit verifies no target tuning.
 
 \CodePath{tasks/task_5_cross_dataset/}
 \TaskEnd{5}
 
 \clearpage
-\begin{thebibliography}{99}
 
-\bibitem{projectbrief}
-ETH Machine Learning and Optimization course team,
-\emph{CNN Project Brief: OptML\_CNN\_project-2}, 2026.
-
-\bibitem{lecun1998}
-Y. LeCun, L. Bottou, Y. Bengio, and P. Haffner,
-``Gradient-based learning applied to document recognition,''
-\emph{Proceedings of the IEEE}, 86(11):2278--2324, 1998.
-
-\bibitem{kingma2015}
-D. P. Kingma and J. Ba,
-``Adam: A method for stochastic optimization,''
-\emph{ICLR}, 2015.
-
-\bibitem{prechelt1998}
-L. Prechelt,
-``Early stopping---but when?'' in \emph{Neural Networks: Tricks of the Trade},
-Springer, 1998.
-
-\bibitem{akiba2019}
-T. Akiba, S. Sano, T. Yanase, T. Ohta, and M. Koyama,
-``Optuna: A next-generation hyperparameter optimization framework,''
-\emph{KDD}, 2019.
-
-\bibitem{hendrycks2019}
-D. Hendrycks and T. Dietterich,
-``Benchmarking neural network robustness to common corruptions and perturbations,''
-\emph{ICLR}, 2019.
-
-\bibitem{zeiler2014}
-M. D. Zeiler and R. Fergus,
-``Visualizing and understanding convolutional networks,''
-\emph{ECCV}, 2014.
-
-\bibitem{selvaraju2017}
-R. R. Selvaraju et al.,
-``Grad-CAM: Visual explanations from deep networks via gradient-based localization,''
-\emph{ICCV}, 2017.
-
-\bibitem{powers2011}
-D. M. W. Powers,
-``Evaluation: From precision, recall and F-measure to ROC, informedness, markedness and correlation,''
-\emph{Journal of Machine Learning Technologies}, 2(1):37--63, 2011.
-
-\bibitem{torralba2011}
-A. Torralba and A. A. Efros,
-``Unbiased look at dataset bias,''
-\emph{CVPR}, 2011.
-
-\bibitem{pan2010}
-S. J. Pan and Q. Yang,
-``A survey on transfer learning,''
-\emph{IEEE Transactions on Knowledge and Data Engineering}, 22(10):1345--1359, 2010.
-
-\end{thebibliography}
+\section*{References}
+\begin{small}
+\begin{enumerate}
+\item A. Müller et al. Machine learning classifiers for surface crack detection in fracture experiments, 2021.
+\item Y. LeCun et al. Gradient-based learning applied to document recognition. \emph{Proceedings of the IEEE}, 1998.
+\item A. Krizhevsky, I. Sutskever, and G. Hinton. ImageNet classification with deep convolutional neural networks. \emph{NeurIPS}, 2012.
+\item J. Bergstra and Y. Bengio. Random search for hyper-parameter optimization. \emph{JMLR}, 2012.
+\item T. Akiba et al. Optuna: A next-generation hyperparameter optimization framework. \emph{KDD}, 2019.
+\item D. Hendrycks and T. Dietterich. Benchmarking neural network robustness to common corruptions and perturbations. \emph{ICLR}, 2019.
+\item M. Zeiler and R. Fergus. Visualizing and understanding convolutional networks. \emph{ECCV}, 2014.
+\item R. Selvaraju et al. Grad-CAM: Visual explanations from deep networks via gradient-based localization. \emph{ICCV}, 2017.
+\item F. Provost and T. Fawcett. \emph{Data Science for Business}. O'Reilly, 2013.
+\item A. Torralba and A. Efros. Unbiased look at dataset bias. \emph{CVPR}, 2011.
+\item S. Pan and Q. Yang. A survey on transfer learning. \emph{IEEE TKDE}, 2010.
+\end{enumerate}
+\end{small}
 
 \end{document}

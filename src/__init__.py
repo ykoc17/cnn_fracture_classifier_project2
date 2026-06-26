@@ -13,7 +13,7 @@ from .data import (
 from .device import resolve_device
 from .evaluation import EvaluationResult, classification_metrics, evaluate_model
 from .models import SimpleCNN, SimpleCNNConfig, build_model
-from .paths import PROCESSED_DATA_ROOT, REPO_ROOT, resolve_repo_path
+from .paths import PROCESSED_DATA_ROOT, REPO_ROOT, repo_relative_path, resolve_repo_path
 from .reproducibility import seed_everything
 from .training import EpochRecord, fit, train_one_epoch
 
@@ -36,6 +36,7 @@ __all__ = [
     "load_checkpoint",
     "load_split",
     "resolve_device",
+    "repo_relative_path",
     "resolve_repo_path",
     "restore_model",
     "save_checkpoint",

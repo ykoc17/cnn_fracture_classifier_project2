@@ -1,0 +1,224 @@
+{
+  "evaluations": [
+    {
+      "accuracy": 0.9219858156028369,
+      "checkpoint": "C:\\Users\\ASUS\\Documents\\Ya\u011f\u0131z Belge Ar\u015fivi\\Studium Files\\8. Semester (ETH)\\Studium\\Machine Learning and Optimization\\Project\\3_CNN\\OptML_CNN_project\\OptML_CNN_project\\tasks\\task_5_cross_dataset\\results\\NT\\best_model.pt",
+      "checkpoint_sha256": "9f021dd15f7d3f4ef172b64a54c26bc4c8e6ee14a512a68e53d7cb601b86806b",
+      "confusion_matrix": [
+        [
+          134,
+          8
+        ],
+        [
+          14,
+          126
+        ]
+      ],
+      "evaluation_seconds": 0.6424059000564739,
+      "loss": 0.18987287718353543,
+      "per_class": {
+        "0": {
+          "f1": 0.9241379310344827,
+          "precision": 0.9054054054054054,
+          "recall": 0.9436619718309859,
+          "support": 142
+        },
+        "1": {
+          "f1": 0.9197080291970803,
+          "precision": 0.9402985074626866,
+          "recall": 0.9,
+          "support": 140
+        }
+      },
+      "source_checkpoint_epoch": 13,
+      "source_dataset": "NT",
+      "source_preprocessing": {
+        "augmentation": null,
+        "dtype": "float32",
+        "input_shape": [
+          1,
+          128,
+          128
+        ],
+        "normalization": null,
+        "pixel_range": [
+          0.0,
+          1.0
+        ]
+      },
+      "source_preprocessing_fingerprint": "9b9dbcc01f3a9bfa0f2c2497ab34c2e50e44c62f3f3b33f9d6513f18f6d09afd",
+      "source_validation_metric": {
+        "accuracy": 0.9039145907473309,
+        "loss": 0.1768424599514313
+      },
+      "split": "test",
+      "target_dataset": "NT",
+      "test_size": 282
+    },
+    {
+      "accuracy": 0.8248587570621468,
+      "checkpoint": "C:\\Users\\ASUS\\Documents\\Ya\u011f\u0131z Belge Ar\u015fivi\\Studium Files\\8. Semester (ETH)\\Studium\\Machine Learning and Optimization\\Project\\3_CNN\\OptML_CNN_project\\OptML_CNN_project\\tasks\\task_5_cross_dataset\\results\\NT\\best_model.pt",
+      "checkpoint_sha256": "9f021dd15f7d3f4ef172b64a54c26bc4c8e6ee14a512a68e53d7cb601b86806b",
+      "confusion_matrix": [
+        [
+          76,
+          16
+        ],
+        [
+          15,
+          70
+        ]
+      ],
+      "evaluation_seconds": 0.4666158999898471,
+      "loss": 0.3123760228439913,
+      "per_class": {
+        "0": {
+          "f1": 0.8306010928961749,
+          "precision": 0.8351648351648352,
+          "recall": 0.8260869565217391,
+          "support": 92
+        },
+        "1": {
+          "f1": 0.8187134502923976,
+          "precision": 0.813953488372093,
+          "recall": 0.8235294117647058,
+          "support": 85
+        }
+      },
+      "source_checkpoint_epoch": 13,
+      "source_dataset": "NT",
+      "source_preprocessing": {
+        "augmentation": null,
+        "dtype": "float32",
+        "input_shape": [
+          1,
+          128,
+          128
+        ],
+        "normalization": null,
+        "pixel_range": [
+          0.0,
+          1.0
+        ]
+      },
+      "source_preprocessing_fingerprint": "9b9dbcc01f3a9bfa0f2c2497ab34c2e50e44c62f3f3b33f9d6513f18f6d09afd",
+      "source_validation_metric": {
+        "accuracy": 0.9039145907473309,
+        "loss": 0.1768424599514313
+      },
+      "split": "test",
+      "target_dataset": "UT",
+      "test_size": 177
+    },
+    {
+      "accuracy": 0.925531914893617,
+      "checkpoint": "C:\\Users\\ASUS\\Documents\\Ya\u011f\u0131z Belge Ar\u015fivi\\Studium Files\\8. Semester (ETH)\\Studium\\Machine Learning and Optimization\\Project\\3_CNN\\OptML_CNN_project\\OptML_CNN_project\\tasks\\task_5_cross_dataset\\results\\UT\\best_model.pt",
+      "checkpoint_sha256": "461105e79bf016773b7fb962ab557c5504a9ed6fb6057755c324a0b1dfd9ba01",
+      "confusion_matrix": [
+        [
+          134,
+          8
+        ],
+        [
+          13,
+          127
+        ]
+      ],
+      "evaluation_seconds": 0.7500603999942541,
+      "loss": 0.2431110993344733,
+      "per_class": {
+        "0": {
+          "f1": 0.9273356401384083,
+          "precision": 0.9115646258503401,
+          "recall": 0.9436619718309859,
+          "support": 142
+        },
+        "1": {
+          "f1": 0.9236363636363636,
+          "precision": 0.9407407407407408,
+          "recall": 0.9071428571428571,
+          "support": 140
+        }
+      },
+      "source_checkpoint_epoch": 29,
+      "source_dataset": "UT",
+      "source_preprocessing": {
+        "augmentation": null,
+        "dtype": "float32",
+        "input_shape": [
+          1,
+          128,
+          128
+        ],
+        "normalization": null,
+        "pixel_range": [
+          0.0,
+          1.0
+        ]
+      },
+      "source_preprocessing_fingerprint": "9b9dbcc01f3a9bfa0f2c2497ab34c2e50e44c62f3f3b33f9d6513f18f6d09afd",
+      "source_validation_metric": {
+        "accuracy": 0.9772727272727273,
+        "loss": 0.11766236681829799
+      },
+      "split": "test",
+      "target_dataset": "NT",
+      "test_size": 282
+    },
+    {
+      "accuracy": 0.9378531073446328,
+      "checkpoint": "C:\\Users\\ASUS\\Documents\\Ya\u011f\u0131z Belge Ar\u015fivi\\Studium Files\\8. Semester (ETH)\\Studium\\Machine Learning and Optimization\\Project\\3_CNN\\OptML_CNN_project\\OptML_CNN_project\\tasks\\task_5_cross_dataset\\results\\UT\\best_model.pt",
+      "checkpoint_sha256": "461105e79bf016773b7fb962ab557c5504a9ed6fb6057755c324a0b1dfd9ba01",
+      "confusion_matrix": [
+        [
+          86,
+          6
+        ],
+        [
+          5,
+          80
+        ]
+      ],
+      "evaluation_seconds": 0.4334328999975696,
+      "loss": 0.23166307571244105,
+      "per_class": {
+        "0": {
+          "f1": 0.9398907103825137,
+          "precision": 0.945054945054945,
+          "recall": 0.9347826086956522,
+          "support": 92
+        },
+        "1": {
+          "f1": 0.935672514619883,
+          "precision": 0.9302325581395349,
+          "recall": 0.9411764705882353,
+          "support": 85
+        }
+      },
+      "source_checkpoint_epoch": 29,
+      "source_dataset": "UT",
+      "source_preprocessing": {
+        "augmentation": null,
+        "dtype": "float32",
+        "input_shape": [
+          1,
+          128,
+          128
+        ],
+        "normalization": null,
+        "pixel_range": [
+          0.0,
+          1.0
+        ]
+      },
+      "source_preprocessing_fingerprint": "9b9dbcc01f3a9bfa0f2c2497ab34c2e50e44c62f3f3b33f9d6513f18f6d09afd",
+      "source_validation_metric": {
+        "accuracy": 0.9772727272727273,
+        "loss": 0.11766236681829799
+      },
+      "split": "test",
+      "target_dataset": "UT",
+      "test_size": 177
+    }
+  ]
+}

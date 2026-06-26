@@ -1,0 +1,139 @@
+{
+  "accuracy": 0.9219858156028369,
+  "checkpoint": "C:\\Users\\ASUS\\Documents\\Ya\u011f\u0131z Belge Ar\u015fivi\\Studium Files\\8. Semester (ETH)\\Studium\\Machine Learning and Optimization\\Project\\3_CNN\\OptML_CNN_project\\OptML_CNN_project\\tasks\\task_0_baseline_cnn\\results\\best_model.pt",
+  "checkpoint_epoch": 13,
+  "checkpoint_sha256": "9f021dd15f7d3f4ef172b64a54c26bc4c8e6ee14a512a68e53d7cb601b86806b",
+  "checkpoint_validation_metric": {
+    "accuracy": 0.9039145907473309,
+    "loss": 0.1768424599514313
+  },
+  "class_names": {
+    "0": "class 0",
+    "1": "class 1"
+  },
+  "confusion_matrix": {
+    "labels": [
+      0,
+      1
+    ],
+    "raw_counts": [
+      [
+        134,
+        8
+      ],
+      [
+        14,
+        126
+      ]
+    ],
+    "row_normalized": [
+      [
+        0.9436619718309859,
+        0.056338028169014086
+      ],
+      [
+        0.1,
+        0.9
+      ]
+    ]
+  },
+  "dataset": "NT",
+  "errors": {
+    "all_false_negative_indices": [
+      7,
+      9,
+      40,
+      52,
+      70,
+      97,
+      100,
+      164,
+      184,
+      185,
+      194,
+      228,
+      235,
+      246
+    ],
+    "all_false_positive_indices": [
+      88,
+      114,
+      147,
+      148,
+      180,
+      199,
+      236,
+      270
+    ],
+    "false_negative_count": 14,
+    "false_positive_count": 8,
+    "gallery_false_negative_indices": [
+      7,
+      9,
+      40,
+      52,
+      70,
+      97
+    ],
+    "gallery_false_positive_indices": [
+      88,
+      114,
+      147,
+      148,
+      180,
+      199
+    ]
+  },
+  "macro_average": {
+    "f1": 0.9219229801157816,
+    "precision": 0.922851956434046,
+    "recall": 0.921830985915493,
+    "support": 282
+  },
+  "per_class": {
+    "0": {
+      "f1": 0.9241379310344827,
+      "precision": 0.9054054054054054,
+      "recall": 0.9436619718309859,
+      "support": 142
+    },
+    "1": {
+      "f1": 0.9197080291970803,
+      "precision": 0.9402985074626866,
+      "recall": 0.9,
+      "support": 140
+    }
+  },
+  "preprocessing": {
+    "augmentation": null,
+    "dtype": "float32",
+    "input_shape": [
+      1,
+      128,
+      128
+    ],
+    "normalization": null,
+    "pixel_range": [
+      0.0,
+      1.0
+    ]
+  },
+  "split": "test",
+  "test_size": 282,
+  "verification": {
+    "accuracy_from_confusion_matrix": 0.9219858156028369,
+    "confusion_matrix_total": 282,
+    "count_total_matches": true,
+    "matrix_accuracy_matches": true,
+    "nt_test_size": 282,
+    "task_0_accuracy_matches": true,
+    "task_0_confusion_matrix_matches": true,
+    "task_0_reference_accuracy": 0.9219858156028369
+  },
+  "weighted_average": {
+    "f1": 0.9219386889875454,
+    "precision": 0.9227282220295874,
+    "recall": 0.9219858156028369,
+    "support": 282
+  }
+}

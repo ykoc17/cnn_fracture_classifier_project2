@@ -1,0 +1,137 @@
+{
+  "checkpoint": "C:\\Users\\ASUS\\Documents\\Ya\u011f\u0131z Belge Ar\u015fivi\\Studium Files\\8. Semester (ETH)\\Studium\\Machine Learning and Optimization\\Project\\3_CNN\\OptML_CNN_project\\OptML_CNN_project\\tasks\\task_0_baseline_cnn\\results\\best_model.pt",
+  "checkpoint_sha256": "9f021dd15f7d3f4ef172b64a54c26bc4c8e6ee14a512a68e53d7cb601b86806b",
+  "dataset": "NT",
+  "failure_definition": {
+    "absolute_accuracy_drop_at_or_above": 0.2,
+    "near_chance_mean_accuracy_at_or_below": 0.6
+  },
+  "first_failure_sigma": 0.1,
+  "noise_seed": 2026,
+  "nonzero_realizations": 5,
+  "preprocessing": {
+    "augmentation": null,
+    "dtype": "float32",
+    "input_shape": [
+      1,
+      128,
+      128
+    ],
+    "normalization": null,
+    "pixel_range": [
+      0.0,
+      1.0
+    ]
+  },
+  "sigma_zero_reproduced": true,
+  "split": "test",
+  "summary": [
+    {
+      "absolute_accuracy_drop": 0.0,
+      "failed": false,
+      "failure_reasons": [],
+      "max_accuracy": 0.9219858156028369,
+      "mean_accuracy": 0.9219858156028369,
+      "mean_loss": 0.18987287718353543,
+      "min_accuracy": 0.9219858156028369,
+      "realizations": 1,
+      "sigma": 0.0,
+      "std_accuracy": 0.0,
+      "std_loss": 0.0
+    },
+    {
+      "absolute_accuracy_drop": 0.13191489361702136,
+      "failed": false,
+      "failure_reasons": [],
+      "max_accuracy": 0.7943262411347518,
+      "mean_accuracy": 0.7900709219858155,
+      "mean_loss": 0.45856452592721225,
+      "min_accuracy": 0.7872340425531915,
+      "realizations": 5,
+      "sigma": 0.05,
+      "std_accuracy": 0.0029668795267165774,
+      "std_loss": 0.0013854856389836762
+    },
+    {
+      "absolute_accuracy_drop": 0.4141843971631206,
+      "failed": true,
+      "failure_reasons": [
+        "near_chance",
+        "accuracy_drop"
+      ],
+      "max_accuracy": 0.5106382978723404,
+      "mean_accuracy": 0.5078014184397163,
+      "mean_loss": 2.521886154776769,
+      "min_accuracy": 0.5070921985815603,
+      "realizations": 5,
+      "sigma": 0.1,
+      "std_accuracy": 0.0015858638138296155,
+      "std_loss": 0.0026092525856252833
+    },
+    {
+      "absolute_accuracy_drop": 0.4184397163120568,
+      "failed": true,
+      "failure_reasons": [
+        "near_chance",
+        "accuracy_drop"
+      ],
+      "max_accuracy": 0.5035460992907801,
+      "mean_accuracy": 0.5035460992907801,
+      "mean_loss": 5.367558487087277,
+      "min_accuracy": 0.5035460992907801,
+      "realizations": 5,
+      "sigma": 0.15,
+      "std_accuracy": 0.0,
+      "std_loss": 0.008663366482007677
+    },
+    {
+      "absolute_accuracy_drop": 0.4184397163120568,
+      "failed": true,
+      "failure_reasons": [
+        "near_chance",
+        "accuracy_drop"
+      ],
+      "max_accuracy": 0.5035460992907801,
+      "mean_accuracy": 0.5035460992907801,
+      "mean_loss": 7.707949717501376,
+      "min_accuracy": 0.5035460992907801,
+      "realizations": 5,
+      "sigma": 0.2,
+      "std_accuracy": 0.0,
+      "std_loss": 0.00757211178909726
+    },
+    {
+      "absolute_accuracy_drop": 0.4184397163120568,
+      "failed": true,
+      "failure_reasons": [
+        "near_chance",
+        "accuracy_drop"
+      ],
+      "max_accuracy": 0.5035460992907801,
+      "mean_accuracy": 0.5035460992907801,
+      "mean_loss": 11.516317253924429,
+      "min_accuracy": 0.5035460992907801,
+      "realizations": 5,
+      "sigma": 0.3,
+      "std_accuracy": 0.0,
+      "std_loss": 0.012465734434352558
+    },
+    {
+      "absolute_accuracy_drop": 0.4184397163120568,
+      "failed": true,
+      "failure_reasons": [
+        "near_chance",
+        "accuracy_drop"
+      ],
+      "max_accuracy": 0.5035460992907801,
+      "mean_accuracy": 0.5035460992907801,
+      "mean_loss": 16.506062357476416,
+      "min_accuracy": 0.5035460992907801,
+      "realizations": 5,
+      "sigma": 0.5,
+      "std_accuracy": 0.0,
+      "std_loss": 0.009509946526777387
+    }
+  ],
+  "task0_reference_accuracy": 0.9219858156028369
+}

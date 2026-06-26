@@ -1,0 +1,102 @@
+{
+  "checkpoint": "C:\\Users\\ASUS\\Documents\\Ya\u011f\u0131z Belge Ar\u015fivi\\Studium Files\\8. Semester (ETH)\\Studium\\Machine Learning and Optimization\\Project\\3_CNN\\OptML_CNN_project\\OptML_CNN_project\\tasks\\task_0_baseline_cnn\\results\\best_model.pt",
+  "checkpoint_sha256": "9f021dd15f7d3f4ef172b64a54c26bc4c8e6ee14a512a68e53d7cb601b86806b",
+  "dataset": "NT",
+  "interpretation_scope": "model-localized evidence, not causal proof",
+  "preprocessing": {
+    "augmentation": null,
+    "dtype": "float32",
+    "input_shape": [
+      1,
+      128,
+      128
+    ],
+    "normalization": null,
+    "pixel_range": [
+      0.0,
+      1.0
+    ]
+  },
+  "sample_indices": [
+    1,
+    0,
+    88,
+    7
+  ],
+  "samples": [
+    {
+      "cam_max": 1.0,
+      "cam_min": 0.0,
+      "class_probabilities": [
+        0.9785946011543274,
+        0.021405354142189026
+      ],
+      "confidence": 0.9785946011543274,
+      "correct": true,
+      "figure": "gradcam_index_0001_correct_class_0.png",
+      "index": 1,
+      "predicted_label": 0,
+      "selection_role": "correct_class_0",
+      "target_class": 0,
+      "true_label": 0
+    },
+    {
+      "cam_max": 1.0,
+      "cam_min": 0.0,
+      "class_probabilities": [
+        0.3538007438182831,
+        0.6461992263793945
+      ],
+      "confidence": 0.6461992263793945,
+      "correct": true,
+      "figure": "gradcam_index_0000_correct_class_1.png",
+      "index": 0,
+      "predicted_label": 1,
+      "selection_role": "correct_class_1",
+      "target_class": 1,
+      "true_label": 1
+    },
+    {
+      "cam_max": 1.0,
+      "cam_min": 0.0,
+      "class_probabilities": [
+        0.02135804109275341,
+        0.9786419868469238
+      ],
+      "confidence": 0.9786419868469238,
+      "correct": false,
+      "figure": "gradcam_index_0088_false_positive.png",
+      "index": 88,
+      "predicted_label": 1,
+      "selection_role": "false_positive",
+      "target_class": 1,
+      "true_label": 0
+    },
+    {
+      "cam_max": 1.0,
+      "cam_min": 0.0,
+      "class_probabilities": [
+        0.6194048523902893,
+        0.3805951476097107
+      ],
+      "confidence": 0.6194048523902893,
+      "correct": false,
+      "figure": "gradcam_index_0007_false_negative.png",
+      "index": 7,
+      "predicted_label": 0,
+      "selection_role": "false_negative",
+      "target_class": 0,
+      "true_label": 1
+    }
+  ],
+  "selection_policy": "fixed correct class 0, correct class 1, false positive, false negative",
+  "split": "test",
+  "target_definition": "the model's predicted class for each sample",
+  "target_layer": "features.6",
+  "verification": {
+    "evaluation_mode_used": true,
+    "gradients_cleared": true,
+    "hooks_removed": true,
+    "original_mode_restored": true
+  }
+}

@@ -1,0 +1,461 @@
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper,margin=15mm,top=14mm,bottom=16mm]{geometry}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{caption}
+\usepackage{xcolor}
+\usepackage{microtype}
+\microtypesetup{expansion=false}
+\usepackage[hidelinks]{hyperref}
+
+\graphicspath{{../}}
+\input{results_values.tex}
+
+\definecolor{accent}{RGB}{27,83,125}
+\hypersetup{colorlinks=true,linkcolor=accent,citecolor=accent,urlcolor=accent}
+\captionsetup{font=small,labelfont=bf,skip=3pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+\setlength{\textfloatsep}{6pt}
+\setlength{\floatsep}{6pt}
+\setlength{\intextsep}{6pt}
+\renewcommand{\arraystretch}{1.08}
+\raggedbottom
+
+\newcommand{\TaskPage}[2]{%
+  \clearpage
+  \section{Task #1: #2}\label{task:#1:start}%
+}
+\newcommand{\TaskEnd}[1]{\label{task:#1:end}}
+\newcommand{\RunHead}[1]{\par\smallskip\noindent\textbf{#1.}\ }
+\newcommand{\CodePath}[1]{%
+  \par\smallskip\noindent\textbf{Code location: }\nolinkurl{#1}.%
+}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE\bfseries Reproducible CNN Classification Study\par}
+  \vspace{2mm}
+  {\large Machine Learning and Optimization Project\par}
+  \vspace{1mm}
+  {\small Final report generated from saved experiment artifacts\par}
+\end{center}
+
+\section*{Introduction}
+
+This report covers the completed tasks \textbf{0, 1, 2, 3, 4, and 5}. Tasks 0--4 use
+NT as the graded dataset. This choice follows the authoritative project PDF, which labels
+ASB ``DO NOT USE'' because its annotations have systematic problems
+\cite{projectbrief}. Task 5 additionally uses the valid-label UT dataset for the prescribed
+NT$\rightarrow$UT and UT$\rightarrow$NT experiments; ASB is never used for graded training
+or evaluation.
+
+All displayed values are generated from the saved JSON/CSV artifacts by
+\nolinkurl{report/generate_values.py}. The generator checks figure existence, hashes its
+inputs, and verifies that the repeated Task 0 result agrees across Tasks 2, 4, and 5.
+Train, validation, and test roles remain separated: model fitting uses train, selection uses
+validation, and test is accessed only after checkpoint and preprocessing lock.
+
+\begin{table}[h]
+\centering
+\small
+\caption{Completed tasks and explicit report page ranges. Each task begins after a forced page break.}
+\label{tab:task-pages}
+\begin{tabular}{clc}
+\toprule
+Task & Deliverable & Pages \\
+\midrule
+0 & Baseline CNN & \pageref{task:0:start}--\pageref{task:0:end} \\
+1 & Optuna hyperparameter study & \pageref{task:1:start}--\pageref{task:1:end} \\
+2 & Gaussian-noise robustness & \pageref{task:2:start}--\pageref{task:2:end} \\
+3 & Activation maps and Grad-CAM & \pageref{task:3:start}--\pageref{task:3:end} \\
+4 & Confusion-matrix error analysis & \pageref{task:4:start}--\pageref{task:4:end} \\
+5 & NT/UT cross-dataset generalization & \pageref{task:5:start}--\pageref{task:5:end} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\RunHead{Reproducibility scope}
+The model architecture, preprocessing, seeds, split roles, checkpoints, raw metrics, and
+commands are retained under each task directory. Academic context is provided throughout,
+including convolutional learning \cite{lecun1998}, validation-based early stopping
+\cite{prechelt1998}, robust evaluation \cite{hendrycks2019}, interpretability
+\cite{zeiler2014,selvaraju2017}, and dataset bias \cite{torralba2011}.
+
+\TaskPage{0}{Baseline CNN}
+
+\RunHead{Approach}
+A deliberately simple CNN uses three $3\times3$ convolution/ReLU stages with
+16, 32, and 64 channels, two max-pooling operations, global average pooling, and a
+two-logit head. Raw $128\times128$ float32 images in $[0,1]$ are used without augmentation
+or normalization. Adam \cite{kingma2015} with learning rate $10^{-3}$ and batch size 64
+updates NT/train; minimum NT/val cross-entropy selects the checkpoint, with patience 6.
+
+\RunHead{Results}
+Training stopped after \TaskZeroEpochsRun{} epochs and restored epoch
+\TaskZeroBestEpoch{}. Table~\ref{tab:t0-results} and Figure~\ref{fig:t0-curves} report the
+locked result.
+
+\begin{minipage}[t]{0.43\linewidth}
+\centering
+\captionof{table}{Task 0 validation and NT/test results.}
+\label{tab:t0-results}
+\small
+\begin{tabular}{lr}
+\toprule
+Metric & Value \\
+\midrule
+Best validation accuracy & \TaskZeroValAccuracy\% \\
+Test accuracy & \TaskZeroAccuracy\% \\
+Correct / test samples & \TaskZeroCorrect/\TaskZeroTestSize \\
+Test cross-entropy & \TaskZeroLoss \\
+Training time (CPU) & \TaskZeroTrainingSeconds{} s \\
+Confusion matrix & \texttt{[[\TaskZeroCMZeroZero,\TaskZeroCMZeroOne],[\TaskZeroCMOneZero,\TaskZeroCMOneOne]]} \\
+\bottomrule
+\end{tabular}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.54\linewidth}
+\centering
+\includegraphics[width=0.72\linewidth]{tasks/task_0_baseline_cnn/results/training_curves.png}
+\captionof{figure}{Sample-weighted train/validation loss and accuracy.}
+\label{fig:t0-curves}
+\end{minipage}
+
+\RunHead{Discussion}
+\textbf{Observation:} learning is rapid through approximately epoch 6, after which validation
+loss oscillates around a plateau; final accuracy is \TaskZeroAccuracy\%.
+\textbf{Interpretation:} the compact convolutional hierarchy is sufficient to learn useful
+NT texture/edge features, consistent with the local-bias advantages of CNNs
+\cite{lecun1998}. \textbf{Limitation:} this is one seed, one NT split, and no augmentation;
+the test result does not establish robustness or cross-domain performance.
+
+\CodePath{tasks/task_0_baseline_cnn/}
+\TaskEnd{0}
+
+\TaskPage{1}{Optuna Hyperparameter Study}
+
+\RunHead{Approach}
+A seeded Optuna TPE study with median pruning \cite{akiba2019} searches learning rate,
+batch size, optimizer, weight decay, depth, channel width, and dropout. Each trial uses
+NT/train and NT/val for \TaskOneTrialEpochs{} epochs; NT/test remains unopened. The study
+contains \TaskOneTrials{} trials (\TaskOneComplete{} complete, \TaskOnePruned{} pruned).
+The selected configuration is retrained from scratch and locked by validation performance.
+
+\RunHead{Results}
+\begin{table}[h]
+\centering
+\small
+\caption{Optuna-selected configuration and locked performance.}
+\label{tab:t1-results}
+\begin{tabular}{llllll}
+\toprule
+Trial & Optimizer & LR & Batch & Depth/base width & Dropout \\
+\midrule
+\TaskOneBestTrial & \TaskOneOptimizer & \TaskOneLearningRate & \TaskOneBatchSize &
+\TaskOneDepth/\TaskOneChannels & \TaskOneDropout \\
+\midrule
+\multicolumn{2}{l}{Best validation accuracy} & \multicolumn{1}{l}{\TaskOneValAccuracy\%} &
+\multicolumn{2}{l}{Final NT/test accuracy} & \TaskOneTestAccuracy\% \\
+\multicolumn{2}{l}{Weight decay} & \multicolumn{1}{l}{\TaskOneWeightDecay} &
+\multicolumn{2}{l}{Correct / test samples} & \TaskOneCorrect/\TaskOneTestSize \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[h]
+\centering
+\begin{minipage}{0.49\linewidth}
+\includegraphics[width=\linewidth]{tasks/task_1_hyperparameter/results/optimization_history.png}
+\end{minipage}\hfill
+\begin{minipage}{0.49\linewidth}
+\includegraphics[width=\linewidth]{tasks/task_1_hyperparameter/results/parameter_importance.png}
+\end{minipage}
+\caption{Validation-only optimization history (left) and inspected fANOVA importance (right).}
+\label{fig:t1-search}
+\end{figure}
+
+\RunHead{Discussion}
+\textbf{Observation:} the selected model reaches \TaskOneTestAccuracy\%, a
+\TaskOneGain-point gain over Task 0. Learning rate and batch size contribute
+\TaskOneLRImportance\% and \TaskOneBatchImportance\% of the local importance estimate.
+\textbf{Interpretation:} optimization primarily improved the training dynamics, while AdamW,
+dropout, and the retained three-stage width provided the best sampled combination.
+\textbf{Limitation:} five-epoch trials favor fast learners; fANOVA is associative under adaptive,
+pruned sampling, and one seed cannot quantify selection variance.
+
+\CodePath{tasks/task_1_hyperparameter/}
+\TaskEnd{1}
+
+\TaskPage{2}{Robustness to Gaussian Noise}
+
+\RunHead{Approach}
+The frozen Task 0 checkpoint is evaluated at
+$\sigma\in\{0,.05,.10,.15,.20,.30,.50\}$. Gaussian noise is added in the original
+$[0,1]$ image domain and clamped before applying checkpoint preprocessing. Each nonzero
+$\sigma$ uses \TaskTwoRealizations{} deterministic realizations. Failure means accuracy
+$\leq\TaskTwoChanceThreshold\%$ or a drop $\geq\TaskTwoFailureDrop$ percentage points,
+following the corruption-testing motivation of Hendrycks and Dietterich \cite{hendrycks2019}.
+
+\RunHead{Results}
+\begin{minipage}[t]{0.43\linewidth}
+\centering
+\captionof{table}{NT/test accuracy under noise; SD and drop are percentage points.}
+\label{tab:t2-noise}
+\scriptsize
+\begin{tabular}{rrrrc}
+\toprule
+$\sigma$ & Mean (\%) & SD & Drop & Failed \\
+\midrule
+\TaskTwoRows
+\bottomrule
+\end{tabular}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.54\linewidth}
+\centering
+\includegraphics[width=\linewidth]{tasks/task_2_robustness/results/accuracy_vs_sigma.png}
+\captionof{figure}{Mean accuracy with one-SD uncertainty.}
+\label{fig:t2-curve}
+\end{minipage}
+
+\begin{center}
+\includegraphics[width=0.84\linewidth]{tasks/task_2_robustness/results/noise_gallery.png}
+\captionof{figure}{Fixed NT/test samples across all evaluated noise levels.}
+\label{fig:t2-gallery}
+\end{center}
+
+\RunHead{Discussion}
+\textbf{Observation:} clean accuracy is \TaskTwoCleanAccuracy\%; it falls to 79.01\% at
+$\sigma=.05$ and 50.78\% at $\sigma=.10$, the first objective failure. The gallery shows
+increasing speckle and loss of fine morphology. \textbf{Interpretation:} the abrupt transition
+indicates strong dependence on fine local texture rather than stable coarse structure.
+\textbf{Limitation:} Gaussian corruption is synthetic, five realizations give limited
+uncertainty precision, and only one frozen NT model is assessed.
+
+\CodePath{tasks/task_2_robustness/}
+\TaskEnd{2}
+
+\TaskPage{3}{Activation Maps and Grad-CAM}
+
+\RunHead{Approach}
+Forward hooks capture activation maps after all three convolution/ReLU depths; Grad-CAM
+\cite{selvaraju2017} targets each prediction at the final convolution. Four fixed NT/test
+indices cover correct predictions from both classes and both error directions. Hooks and
+gradients are removed after use. These methods diagnose representations
+\cite{zeiler2014}; Grad-CAM is model-localized evidence, not causal proof.
+
+\RunHead{Results}
+\begin{table}[h]
+\centering
+\small
+\caption{Stable samples recorded in both interpretability metadata files.}
+\label{tab:t3-samples}
+\begin{tabular}{rllrr}
+\toprule
+Index & Role & True & Predicted & Confidence (\%) \\
+\midrule
+\TaskThreeRows
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[h]
+\centering
+\begin{minipage}[c]{0.40\linewidth}
+\centering
+\includegraphics[width=0.86\linewidth]{tasks/task_3_interpretability/results/activation_maps/activation_index_0088_false_positive.png}
+\small (a) Multi-depth activations, false positive \TaskThreeFalsePositiveIndex.
+\end{minipage}\hfill
+\begin{minipage}[c]{0.58\linewidth}
+\centering
+\includegraphics[width=\linewidth]{tasks/task_3_interpretability/results/gradcam/gradcam_index_0000_correct_class_1.png}
+\small (b) Correct class 1.\\[2pt]
+\includegraphics[width=\linewidth]{tasks/task_3_interpretability/results/gradcam/gradcam_index_0088_false_positive.png}
+\small (c) Confident false positive.
+\end{minipage}
+\caption{Activation hierarchy and predicted-class Grad-CAM evidence for fixed samples.}
+\label{fig:t3-interpretability}
+\end{figure}
+
+\RunHead{Discussion}
+\textbf{Observation:} early maps retain fine edges and texture; deeper maps become coarser
+and spatially selective. Correct and incorrect class-1 predictions can activate similar late
+patches; the false positive is wrong despite \TaskThreeFalsePositiveConfidence\% confidence.
+\textbf{Interpretation:} the model combines texture density, contrast transitions, and boundaries
+rather than isolating one human-recognizable fracture template. \textbf{Limitation:} four selected
+samples, independent activation scaling, $32\times32$ final resolution, and uncalibrated
+confidence limit generalization and explanation strength.
+
+\CodePath{tasks/task_3_interpretability/}
+\TaskEnd{3}
+
+\TaskPage{4}{Confusion-Matrix Error Analysis}
+
+\RunHead{Approach}
+The frozen Task 0 model is evaluated once on all \TaskZeroTestSize{} NT/test samples in index
+order. Predictions, confidence, correctness, raw/row-normalized matrices, class metrics, and
+stable false-positive/false-negative gallery indices are saved. Precision, recall, and F1 are
+reported because accuracy alone hides directional errors \cite{powers2011}.
+
+\RunHead{Results}
+\begin{table}[h]
+\centering
+\small
+\caption{Per-class test metrics; overall accuracy is \TaskFourAccuracy\% and macro F1 is \TaskFourMacroFOne\%.}
+\label{tab:t4-metrics}
+\begin{tabular}{lrrrr}
+\toprule
+Class & Precision (\%) & Recall (\%) & F1 (\%) & Support \\
+\midrule
+0 & \TaskFourClassZeroPrecision & \TaskFourClassZeroRecall & \TaskFourClassZeroFOne & \TaskFourClassZeroSupport \\
+1 & \TaskFourClassOnePrecision & \TaskFourClassOneRecall & \TaskFourClassOneFOne & \TaskFourClassOneSupport \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[h]
+\centering
+\begin{minipage}[c]{0.34\linewidth}
+\includegraphics[width=\linewidth]{tasks/task_4_confusion_matrix/results/confusion_matrix_normalized.png}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.64\linewidth}
+\includegraphics[width=\linewidth]{tasks/task_4_confusion_matrix/results/misclassified_gallery.png}
+\end{minipage}
+\caption{Row-normalized confusion matrix (left) and inspected false positives/negatives (right).}
+\label{fig:t4-errors}
+\end{figure}
+
+\RunHead{Discussion}
+\textbf{Observation:} class 1 is harder by recall (\TaskFourClassOneRecall\% versus
+\TaskFourClassZeroRecall\%), producing \TaskFourFalseNegatives{} false negatives and
+\TaskFourFalsePositives{} false positives. Several selected false negatives contain strong
+central bands or boundaries, whereas false positives span dark, mid-tone, and bright images.
+\textbf{Interpretation:} illumination or boundaries may disrupt learned texture cues, but the
+gallery does not establish causality. \textbf{Limitation:} it shows 12 of 22 errors from one
+checkpoint; confidence is uncalibrated and proposed remedies must be selected on validation,
+not these test errors.
+
+\CodePath{tasks/task_4_confusion_matrix/}
+\TaskEnd{4}
+
+\TaskPage{5}{NT/UT Cross-Dataset Generalization}
+
+\RunHead{Approach}
+Identical Task 0 architectures and protocols train separately on NT and UT, with seed 42 reset
+for each. Each checkpoint is selected only by its source validation loss (epochs
+\TaskFiveNTBestEpoch{} and \TaskFiveUTBestEpoch{}) and locked before either test split is opened.
+Identity preprocessing from each source checkpoint is applied unchanged to both targets.
+The PDF lists only NT$\rightarrow$UT and UT$\rightarrow$NT yet retains contradictory ``3$\times$3''
+wording; the PDF's ASB warning makes the valid matrix 2$\times$2.
+
+\RunHead{Results}
+\begin{minipage}[t]{0.43\linewidth}
+\centering
+\captionof{table}{Accuracy matrix (\%); rows are source and columns are target test domains.}
+\label{tab:t5-matrix}
+\small
+\begin{tabular}{lrr}
+\toprule
+Source & NT & UT \\
+\midrule
+NT & \TaskFiveNTNT & \TaskFiveNTUT \\
+UT & \TaskFiveUTNT & \TaskFiveUTUT \\
+\bottomrule
+\end{tabular}
+
+\vspace{4mm}
+\begin{tabular}{lrr}
+\toprule
+Source & Selected epoch & CPU time (s) \\
+\midrule
+NT & \TaskFiveNTBestEpoch & \TaskFiveNTTrainingSeconds \\
+UT & \TaskFiveUTBestEpoch & \TaskFiveUTTrainingSeconds \\
+\bottomrule
+\end{tabular}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.54\linewidth}
+\centering
+\includegraphics[width=0.82\linewidth]{tasks/task_5_cross_dataset/results/accuracy_heatmap.png}
+\captionof{figure}{Within-domain diagonal and required cross-domain transfer.}
+\label{fig:t5-heatmap}
+\end{minipage}
+
+\RunHead{Discussion}
+\textbf{Observation:} transfer is asymmetric. NT$\rightarrow$UT is \TaskFiveNTUT\%,
+\TaskFiveNTUTSourceDrop{} points below NT$\rightarrow$NT and
+\TaskFiveNTUTTargetGap{} points below UT$\rightarrow$UT; its
+\TaskFiveNTUTClassZeroErrors{} class-0 and \TaskFiveNTUTClassOneErrors{} class-1 errors show
+no single-class collapse. UT$\rightarrow$NT reaches \TaskFiveUTNT\%, only one correct image
+above NT$\rightarrow$NT. \textbf{Interpretation:} UT features overlap well with NT in this run,
+while NT does not fully cover UT variability; accuracy cannot identify the physical source of
+shift. This reflects the dataset-bias problem \cite{torralba2011} and motivates transfer methods
+\cite{pan2010}. \textbf{Limitation:} one seed, unequal test sizes, identity preprocessing, and no
+domain adaptation prevent broader claims. The saved leakage audit verifies no target tuning.
+
+\CodePath{tasks/task_5_cross_dataset/}
+\TaskEnd{5}
+
+\clearpage
+\begin{thebibliography}{99}
+
+\bibitem{projectbrief}
+ETH Machine Learning and Optimization course team,
+\emph{CNN Project Brief: OptML\_CNN\_project-2}, 2026.
+
+\bibitem{lecun1998}
+Y. LeCun, L. Bottou, Y. Bengio, and P. Haffner,
+``Gradient-based learning applied to document recognition,''
+\emph{Proceedings of the IEEE}, 86(11):2278--2324, 1998.
+
+\bibitem{kingma2015}
+D. P. Kingma and J. Ba,
+``Adam: A method for stochastic optimization,''
+\emph{ICLR}, 2015.
+
+\bibitem{prechelt1998}
+L. Prechelt,
+``Early stopping---but when?'' in \emph{Neural Networks: Tricks of the Trade},
+Springer, 1998.
+
+\bibitem{akiba2019}
+T. Akiba, S. Sano, T. Yanase, T. Ohta, and M. Koyama,
+``Optuna: A next-generation hyperparameter optimization framework,''
+\emph{KDD}, 2019.
+
+\bibitem{hendrycks2019}
+D. Hendrycks and T. Dietterich,
+``Benchmarking neural network robustness to common corruptions and perturbations,''
+\emph{ICLR}, 2019.
+
+\bibitem{zeiler2014}
+M. D. Zeiler and R. Fergus,
+``Visualizing and understanding convolutional networks,''
+\emph{ECCV}, 2014.
+
+\bibitem{selvaraju2017}
+R. R. Selvaraju et al.,
+``Grad-CAM: Visual explanations from deep networks via gradient-based localization,''
+\emph{ICCV}, 2017.
+
+\bibitem{powers2011}
+D. M. W. Powers,
+``Evaluation: From precision, recall and F-measure to ROC, informedness, markedness and correlation,''
+\emph{Journal of Machine Learning Technologies}, 2(1):37--63, 2011.
+
+\bibitem{torralba2011}
+A. Torralba and A. A. Efros,
+``Unbiased look at dataset bias,''
+\emph{CVPR}, 2011.
+
+\bibitem{pan2010}
+S. J. Pan and Q. Yang,
+``A survey on transfer learning,''
+\emph{IEEE Transactions on Knowledge and Data Engineering}, 22(10):1345--1359, 2010.
+
+\end{thebibliography}
+
+\end{document}

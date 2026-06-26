@@ -33,7 +33,7 @@ class SimpleCNN(nn.Module):
             layers.extend(
                 [
                     nn.Conv2d(input_channels, output_channels, kernel_size=3, padding=1),
-                    nn.ReLU(inplace=True),
+                    nn.ReLU(inplace=False),
                 ]
             )
             if index < len(self.config.channels) - 1:

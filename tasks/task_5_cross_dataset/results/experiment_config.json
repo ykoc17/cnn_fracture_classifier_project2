@@ -1,0 +1,88 @@
+{
+  "architecture": {
+    "kwargs": {
+      "channels": [
+        16,
+        32,
+        64
+      ],
+      "dropout": 0.0,
+      "in_channels": 1,
+      "num_classes": 2
+    },
+    "name": "simple_cnn"
+  },
+  "assignment_interpretation": {
+    "asb_policy": "prohibited for graded training/evaluation because the PDF says its labels have systematic annotation problems",
+    "matrix_shape": [
+      2,
+      2
+    ],
+    "pdf_contradiction": "Task 5 lists only NT->UT and UT->NT but retains obsolete 3x3 wording",
+    "separate_ta_clarification_found_in_repository": false,
+    "valid_label_experiments": [
+      "NT->UT",
+      "UT->NT"
+    ]
+  },
+  "batch_size": 64,
+  "command_arguments": [
+    "--seed",
+    "42",
+    "--epochs",
+    "30",
+    "--batch-size",
+    "64",
+    "--learning-rate",
+    "0.001",
+    "--device",
+    "cpu",
+    "--workers",
+    "0",
+    "--early-stopping-patience",
+    "6",
+    "--output-dir",
+    "tasks/task_5_cross_dataset/results"
+  ],
+  "data_root": "C:\\Users\\ASUS\\Documents\\Ya\u011f\u0131z Belge Ar\u015fivi\\Studium Files\\8. Semester (ETH)\\Studium\\Machine Learning and Optimization\\Project\\3_CNN\\OptML_CNN_project\\OptML_CNN_project\\data\\processed",
+  "device_requested": "cpu",
+  "device_resolved": "cpu",
+  "early_stopping_patience": 6,
+  "epochs": 30,
+  "learning_rate": 0.001,
+  "loss": "CrossEntropyLoss",
+  "model_selection": "minimum source-domain validation cross-entropy loss",
+  "optimizer": "Adam",
+  "preprocessing": {
+    "augmentation": null,
+    "dtype": "float32",
+    "input_shape": [
+      1,
+      128,
+      128
+    ],
+    "normalization": null,
+    "pixel_range": [
+      0.0,
+      1.0
+    ]
+  },
+  "seed_reset_identically_for_each_source": 42,
+  "software": {
+    "matplotlib": "3.10.9",
+    "numpy": "2.2.6",
+    "python": "3.10.20",
+    "scikit_learn": "1.7.2",
+    "torch": "2.12.1+cpu"
+  },
+  "sources": [
+    "NT",
+    "UT"
+  ],
+  "targets": [
+    "NT",
+    "UT"
+  ],
+  "train_only": false,
+  "workers": 0
+}

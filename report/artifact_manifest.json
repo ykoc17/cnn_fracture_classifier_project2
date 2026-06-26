@@ -1,0 +1,112 @@
+{
+  "cross_checks": {
+    "task0_matches_task2_sigma_zero": true,
+    "task0_matches_task4": true,
+    "task0_matches_task5_nt_to_nt": true,
+    "task5_leakage_audit_passed": true
+  },
+  "generator": "report/generate_values.py",
+  "inputs": {
+    "tasks/task_0_baseline_cnn/results/metrics.json": {
+      "sha256": "73cd54278e3cfaaa8254a3ad4d91154f6b6791ed9ede136320270d20b07fcda9",
+      "size_bytes": 950
+    },
+    "tasks/task_0_baseline_cnn/results/run_config.json": {
+      "sha256": "070e358534e9ebc863b369e837571a7c38bc017c1b10332c07fa0db0e9bba30d",
+      "size_bytes": 1985
+    },
+    "tasks/task_0_baseline_cnn/results/training_curves.png": {
+      "sha256": "082adc70303e261911e3534089cf6123ea6c7cdde23a1add87ef78d2a0f54032",
+      "size_bytes": 95577
+    },
+    "tasks/task_1_hyperparameter/results/best_params.json": {
+      "sha256": "632e073d2df66e490542e14e6f7925382d33ca835fd8cc1d858232a7d78752e2",
+      "size_bytes": 1170
+    },
+    "tasks/task_1_hyperparameter/results/final_metrics.json": {
+      "sha256": "020e0b23aecd40bc507ffe42b68e855e6d0af304811e96846f709292fef5ab24",
+      "size_bytes": 986
+    },
+    "tasks/task_1_hyperparameter/results/optimization_history.png": {
+      "sha256": "f44757a42ab927cf7541946de765e4e9fb5e02c79928b3a93c4a6fbe81978171",
+      "size_bytes": 48316
+    },
+    "tasks/task_1_hyperparameter/results/parameter_importance.png": {
+      "sha256": "41f326b287c6f4c5d797a3c40466204cdd0ef7ef786f26d687b14df10b741360",
+      "size_bytes": 37177
+    },
+    "tasks/task_1_hyperparameter/results/study_config.json": {
+      "sha256": "4bff9244ade2b55aafeb7c073cac16477ae95b7d536a41494a40934554094d20",
+      "size_bytes": 2444
+    },
+    "tasks/task_2_robustness/results/accuracy_vs_sigma.png": {
+      "sha256": "e8a87095b5b821974626f190655a1493d08eb086c4c78cf25eebcedba022feab",
+      "size_bytes": 51355
+    },
+    "tasks/task_2_robustness/results/noise_gallery.png": {
+      "sha256": "2b99f80d1a1e1468a8f11085e9ee1bca0d7ee74bcb304ac39c7b5fe99e665d80",
+      "size_bytes": 1933059
+    },
+    "tasks/task_2_robustness/results/summary.json": {
+      "sha256": "06a724cf9b0526bba526bb66840d20ff932fbec741b694029ff5dd0213ea6b4d",
+      "size_bytes": 4083
+    },
+    "tasks/task_3_interpretability/results/activation_maps/activation_index_0088_false_positive.png": {
+      "sha256": "2f6166b42a3e3ebf0b2ec7ffabfc061b80598f09a8fb7ce92867e4d3e44f3542",
+      "size_bytes": 604642
+    },
+    "tasks/task_3_interpretability/results/activation_maps/activation_metadata.json": {
+      "sha256": "11585f183a39b59a9b877f716746683578082b1d908bd9c408aff37159f5d742",
+      "size_bytes": 5826
+    },
+    "tasks/task_3_interpretability/results/gradcam/gradcam_index_0000_correct_class_1.png": {
+      "sha256": "3778a1ff85dc2146f7e9b2d53979692291ea8625690dc20d8601a74010548c23",
+      "size_bytes": 211347
+    },
+    "tasks/task_3_interpretability/results/gradcam/gradcam_index_0007_false_negative.png": {
+      "sha256": "95955410eb3521e77da48607cfe8aecdf81d3c9010fe37fde60e5cb26ddcbe24",
+      "size_bytes": 230155
+    },
+    "tasks/task_3_interpretability/results/gradcam/gradcam_index_0088_false_positive.png": {
+      "sha256": "6d305a7c279ef232d5edb158382b3783f61b4a6b1925bbec91348fdac28fd3e9",
+      "size_bytes": 246048
+    },
+    "tasks/task_3_interpretability/results/gradcam/gradcam_metadata.json": {
+      "sha256": "b73669ce942fe3f4b13ebaefa67ce73f162e2422130430603dcef068393c473f",
+      "size_bytes": 2842
+    },
+    "tasks/task_4_confusion_matrix/results/confusion_matrix_normalized.png": {
+      "sha256": "0c0e338fce824ef2ed1a2203b93a7ff3f7287b92701359974d083236b0f5aa01",
+      "size_bytes": 96758
+    },
+    "tasks/task_4_confusion_matrix/results/metrics.json": {
+      "sha256": "c23ddb0ba807cf8b32889f31bc80f24db4282bbbb0bea0cd575608d9e6700111",
+      "size_bytes": 2868
+    },
+    "tasks/task_4_confusion_matrix/results/misclassified_gallery.png": {
+      "sha256": "c781829b24832191557a9fdd4a0251952f0ee134e25b2b953e67ce1fddca6685",
+      "size_bytes": 660602
+    },
+    "tasks/task_5_cross_dataset/results/NT/run_config.json": {
+      "sha256": "026384fa0a343edcea1a1706cb26365cf6de4cebfa78513e04c684958eddc844",
+      "size_bytes": 1672
+    },
+    "tasks/task_5_cross_dataset/results/UT/run_config.json": {
+      "sha256": "230f4dbc3fd4406e5cf768daf29b50814115719009506eb4773d9a5d95506230",
+      "size_bytes": 1674
+    },
+    "tasks/task_5_cross_dataset/results/accuracy_heatmap.png": {
+      "sha256": "eb0499bfe11c7dc3d89e6996d2a55ee4f66031ab153ca044a0a6ca10caec675c",
+      "size_bytes": 102322
+    },
+    "tasks/task_5_cross_dataset/results/leakage_audit.json": {
+      "sha256": "8f2dc6f6b4d29fa1fb364e9b52809a142c8dfbbc4d43d08eae067f6556529b52",
+      "size_bytes": 1785
+    },
+    "tasks/task_5_cross_dataset/results/raw_metrics.json": {
+      "sha256": "390c100e200dfea6e2d5d06823b9bbe33c69cdadec822f08b6cf6c056758b926",
+      "size_bytes": 6823
+    }
+  },
+  "output": "report/results_values.tex"
+}

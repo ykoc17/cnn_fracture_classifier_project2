@@ -1,0 +1,263 @@
+{
+  "checkpoint": "C:\\Users\\ASUS\\Documents\\Ya\u011f\u0131z Belge Ar\u015fivi\\Studium Files\\8. Semester (ETH)\\Studium\\Machine Learning and Optimization\\Project\\3_CNN\\OptML_CNN_project\\OptML_CNN_project\\tasks\\task_0_baseline_cnn\\results\\best_model.pt",
+  "checkpoint_sha256": "9f021dd15f7d3f4ef172b64a54c26bc4c8e6ee14a512a68e53d7cb601b86806b",
+  "dataset": "NT",
+  "preprocessing": {
+    "augmentation": null,
+    "dtype": "float32",
+    "input_shape": [
+      1,
+      128,
+      128
+    ],
+    "normalization": null,
+    "pixel_range": [
+      0.0,
+      1.0
+    ]
+  },
+  "sample_indices": [
+    1,
+    0,
+    88,
+    7
+  ],
+  "samples": [
+    {
+      "class_probabilities": [
+        0.9785946011543274,
+        0.021405354142189026
+      ],
+      "confidence": 0.9785946011543274,
+      "correct": true,
+      "figure": "act_0001_c0.png",
+      "index": 1,
+      "layers": [
+        {
+          "activation_shape": [
+            1,
+            16,
+            128,
+            128
+          ],
+          "displayed_top_channels": [
+            4,
+            10,
+            3
+          ],
+          "layer": "features.1"
+        },
+        {
+          "activation_shape": [
+            1,
+            32,
+            64,
+            64
+          ],
+          "displayed_top_channels": [
+            13,
+            6,
+            14
+          ],
+          "layer": "features.4"
+        },
+        {
+          "activation_shape": [
+            1,
+            64,
+            32,
+            32
+          ],
+          "displayed_top_channels": [
+            1,
+            54,
+            6
+          ],
+          "layer": "features.7"
+        }
+      ],
+      "predicted_label": 0,
+      "selection_role": "correct_class_0",
+      "true_label": 0
+    },
+    {
+      "class_probabilities": [
+        0.3538007438182831,
+        0.6461992263793945
+      ],
+      "confidence": 0.6461992263793945,
+      "correct": true,
+      "figure": "act_0000_c1.png",
+      "index": 0,
+      "layers": [
+        {
+          "activation_shape": [
+            1,
+            16,
+            128,
+            128
+          ],
+          "displayed_top_channels": [
+            4,
+            10,
+            3
+          ],
+          "layer": "features.1"
+        },
+        {
+          "activation_shape": [
+            1,
+            32,
+            64,
+            64
+          ],
+          "displayed_top_channels": [
+            13,
+            6,
+            14
+          ],
+          "layer": "features.4"
+        },
+        {
+          "activation_shape": [
+            1,
+            64,
+            32,
+            32
+          ],
+          "displayed_top_channels": [
+            27,
+            17,
+            41
+          ],
+          "layer": "features.7"
+        }
+      ],
+      "predicted_label": 1,
+      "selection_role": "correct_class_1",
+      "true_label": 1
+    },
+    {
+      "class_probabilities": [
+        0.02135804109275341,
+        0.9786419868469238
+      ],
+      "confidence": 0.9786419868469238,
+      "correct": false,
+      "figure": "act_0088_fp.png",
+      "index": 88,
+      "layers": [
+        {
+          "activation_shape": [
+            1,
+            16,
+            128,
+            128
+          ],
+          "displayed_top_channels": [
+            4,
+            10,
+            3
+          ],
+          "layer": "features.1"
+        },
+        {
+          "activation_shape": [
+            1,
+            32,
+            64,
+            64
+          ],
+          "displayed_top_channels": [
+            13,
+            6,
+            14
+          ],
+          "layer": "features.4"
+        },
+        {
+          "activation_shape": [
+            1,
+            64,
+            32,
+            32
+          ],
+          "displayed_top_channels": [
+            27,
+            17,
+            41
+          ],
+          "layer": "features.7"
+        }
+      ],
+      "predicted_label": 1,
+      "selection_role": "false_positive",
+      "true_label": 0
+    },
+    {
+      "class_probabilities": [
+        0.6194048523902893,
+        0.3805951476097107
+      ],
+      "confidence": 0.6194048523902893,
+      "correct": false,
+      "figure": "act_0007_fn.png",
+      "index": 7,
+      "layers": [
+        {
+          "activation_shape": [
+            1,
+            16,
+            128,
+            128
+          ],
+          "displayed_top_channels": [
+            4,
+            10,
+            3
+          ],
+          "layer": "features.1"
+        },
+        {
+          "activation_shape": [
+            1,
+            32,
+            64,
+            64
+          ],
+          "displayed_top_channels": [
+            13,
+            6,
+            14
+          ],
+          "layer": "features.4"
+        },
+        {
+          "activation_shape": [
+            1,
+            64,
+            32,
+            32
+          ],
+          "displayed_top_channels": [
+            27,
+            17,
+            41
+          ],
+          "layer": "features.7"
+        }
+      ],
+      "predicted_label": 0,
+      "selection_role": "false_negative",
+      "true_label": 1
+    }
+  ],
+  "selection_policy": "fixed correct class 0, correct class 1, false positive, false negative",
+  "split": "test",
+  "verification": {
+    "evaluation_mode_used": true,
+    "hooks_removed": true,
+    "original_mode_restored": true
+  },
+  "visualization": "mean activation and three highest-spatial-mean channels at every ReLU depth"
+}
